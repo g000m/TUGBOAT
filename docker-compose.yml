@@ -27,6 +27,8 @@ services:
             - redis:redis
             - mailhog:mailhog
         restart: on-failure
+        environment:
+            XDEBUG_CONFIG: "remote_host=192.168.1.11"
     db:
         env_file:
             - .env
@@ -52,5 +54,14 @@ services:
         ports:
             - "8025:8025"
             - "1025:1025"
+    wpcli:
+        command: "--info"
+        container_name: wpcli
+        entrypoint: wp
+        image: tatemz/wp-cli
+        links:
+          - db:mysql
+        volumes:
+          - "./www:/var/www/html"
 volumes:
   web-data-volume:

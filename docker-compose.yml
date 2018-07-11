@@ -20,7 +20,7 @@ services:
             - "1080:1080"
             - "3001:3001"
             - "3000:3000"
-            - "10000:10000"            
+            - "10000:10000"
             #- "2222:22"
         links:
             - db:mysql
@@ -28,7 +28,7 @@ services:
             - mailhog:mailhog
         restart: on-failure
         environment:
-            XDEBUG_CONFIG: "remote_host=192.168.1.11"
+            XDEBUG_CONFIG: "remote_connect_back=0 remote_host=192.168.1.11" #set this to your local machine IP
     db:
         env_file:
             - .env
